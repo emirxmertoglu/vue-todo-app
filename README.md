@@ -1,4 +1,5 @@
 # vue-todo-app
+Superbasic Vue.Js Todo App coded with Composition API 
 
 ## Project setup
 ```
