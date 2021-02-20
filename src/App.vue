@@ -5,8 +5,11 @@
     <input type="text" v-model="todo" autofocus />
     <button class="btn" @click="addNewTodo">Add New Todo</button>
     <button class="btn" @click="removeAllTodos">Remove All Todos</button>
-    <button class="btn">Mark All Todos Done</button>
+    <button class="btn" @click="markAllTodosDone">Mark All Todos Done</button>
   </form>
+
+  <label>Things Todo</label>
+  <hr />
   <ul>
     <li class="todo" v-for="(todo, index) in todos" :key="todo.content">
       <h3 :class="{ done: todo.done }" @click="toggleDone(todo)">
@@ -45,6 +48,10 @@ export default {
       todos.value = [];
     }
 
+    function markAllTodosDone() {
+      todos.value.forEach((todo) => (todo.done = true));
+    }
+
     return {
       todo,
       todos,
@@ -52,6 +59,7 @@ export default {
       toggleDone,
       removeTodo,
       removeAllTodos,
+      markAllTodosDone,
     };
   },
 };
@@ -61,14 +69,14 @@ export default {
 #app {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  width: 1200px;
+  max-width: 700px;
   margin: 40px auto;
   text-align: center;
 }
 
 .btn {
   display: block;
-  margin: 10px auto;
+  margin: 20px auto;
   padding: 10px;
   border: none;
   background: #eee;
@@ -90,12 +98,15 @@ input {
   padding: 5px;
 }
 
+ul {
+  padding: 0;
+}
+
 .todo {
   list-style: none;
 }
 
 .todo h3 {
-  margin-left: -30px;
   cursor: pointer;
 }
 
