@@ -4,12 +4,15 @@
     <label>New Todo</label> <br />
     <input type="text" v-model="todo" autofocus />
     <button class="btn" @click="addNewTodo">Add New Todo</button>
-    <button class="btn">Remove All Todos</button>
+    <button class="btn" @click="removeAllTodos">Remove All Todos</button>
     <button class="btn">Mark All Todos Done</button>
   </form>
   <ul>
-    <li class="todo" v-for="todo in todos" :key="todo.content">
-      <h3>{{ todo.content }}</h3>
+    <li class="todo" v-for="(todo, index) in todos" :key="todo.content">
+      <h3 :class="{ done: todo.done }" @click="toggleDone(todo)">
+        {{ todo.content }}
+      </h3>
+      <button @click="removeTodo(index)" class="btn">Remove Todo</button>
     </li>
   </ul>
 </template>
@@ -30,7 +33,26 @@ export default {
       todo.value = "";
     }
 
-    return { todo, todos, addNewTodo };
+    function toggleDone(todo) {
+      todo.done = !todo.done;
+    }
+
+    function removeTodo(index) {
+      todos.value.splice(index, 1);
+    }
+
+    function removeAllTodos() {
+      todos.value = [];
+    }
+
+    return {
+      todo,
+      todos,
+      addNewTodo,
+      toggleDone,
+      removeTodo,
+      removeAllTodos,
+    };
   },
 };
 </script>
@@ -54,6 +76,7 @@ export default {
   width: 170px;
   border-radius: 10px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 label {
@@ -73,5 +96,10 @@ input {
 
 .todo h3 {
   margin-left: -30px;
+  cursor: pointer;
+}
+
+.done {
+  text-decoration: line-through;
 }
 </style>
