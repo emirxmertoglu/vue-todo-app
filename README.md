@@ -1,5 +1,5 @@
 # vue-todo-app
-Superbasic Vue.Js 3 Todo App coded with Composition API 
+Super basic Vue.Js 3 Todo App coded with Composition API 
 
 ## Project setup
 ```
